@@ -3,7 +3,9 @@ package com.example.japworkshop.controller;
 import com.example.japworkshop.model.dto.DepartmentDto;
 import com.example.japworkshop.model.entity.Department;
 import com.example.japworkshop.service.DepartmentService;
+import com.example.japworkshop.service.EmployeeService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,9 +29,9 @@ public class DepartmentController {
     }
 
     @PostMapping("/addDepartment")
-    public ResponseEntity<Department> addDepartment(@RequestBody Department department) {
-        Department savedDepartment = departmentService.addDepartment(department);
-        return ResponseEntity.ok(savedDepartment);
+    public ResponseEntity<DepartmentDto> addDepartment(@RequestBody DepartmentDto departmentDto) {
+        DepartmentDto savedDepartmentDto = departmentService.addDepartment(departmentDto);
+        return new ResponseEntity<>(savedDepartmentDto, HttpStatus.CREATED);
     }
 
     @PutMapping("/departmentUpdate")

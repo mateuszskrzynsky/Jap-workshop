@@ -7,7 +7,9 @@ import com.example.japworkshop.repository.DepartmentRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -34,9 +36,11 @@ public class DepartmentService {
         }
         return departmentRepository.findAllByAddress_City(city);
     }
-
-    public Department addDepartment(Department department) {
-        return departmentRepository.save(department);
+    @Transactional
+    public DepartmentDto addDepartment(DepartmentDto departmentDto) {
+        Department department = departmentMapper.toEntity(departmentDto);
+        department = departmentRepository.save(department);
+        return departmentMapper.toDto(department);
     }
 
     public Department updateDepartment(Department department, Long id){
@@ -59,5 +63,9 @@ public class DepartmentService {
                 map(ent-> departmentMapper.toDto(ent))
                 .collect(Collectors.toList());
 
+    }
+
+    private void throwSomeException() throws SQLException {
+        throw new SQLException("Nasz wyjątek");
     }
 }
