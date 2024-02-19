@@ -1,5 +1,6 @@
 package com.example.japworkshop.controller;
 
+import com.example.japworkshop.model.dto.DepartmentDto;
 import com.example.japworkshop.model.entity.Department;
 import com.example.japworkshop.service.DepartmentService;
 import lombok.RequiredArgsConstructor;
@@ -41,6 +42,12 @@ public class DepartmentController {
     public ResponseEntity<Void> deleteDepartment(@PathVariable Long id){
         departmentService.deleteDepartment(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/findAllByName")
+    public ResponseEntity<List<DepartmentDto>> findByAllName(@RequestParam String departmentName){
+        List<DepartmentDto> dtos = departmentService.findAllByName(departmentName);
+        return ResponseEntity.ok(dtos);
     }
 
 

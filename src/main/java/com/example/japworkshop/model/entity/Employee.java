@@ -32,6 +32,15 @@ public class Employee {
     @OneToOne
     private EntryCard entryCard;
 
+    @ManyToOne
+    @JoinColumn(name="supervisor_id")
+    @JsonBackReference
+    private Supervisor supervisor;
+
+    public void setSupervisor(Supervisor supervisor) {
+        this.supervisor = supervisor;
+    }
+
     public void setDepartment(Department department) {
         this.department = department;
     }
