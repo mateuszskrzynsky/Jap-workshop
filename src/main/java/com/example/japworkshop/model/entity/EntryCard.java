@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.Set;
 import java.util.UUID;
 
 @Entity
@@ -20,5 +21,21 @@ public class EntryCard {
 
     public void setUuid(UUID uuid) {
         this.uuid = uuid;
+    }
+
+    @ManyToMany
+    @JoinTable(name = "floor_access", joinColumns = @JoinColumn(name = "entry_card_id"), inverseJoinColumns = @JoinColumn(name = "floor_id"))
+    private Set<Floor> floorAccess;
+
+    @Override
+    public String toString() {
+        return "EntryCard{" +
+                "id=" + id +
+                ", uuid=" + uuid +
+                '}';
+    }
+
+    public void setFloorAccess(Set<Floor> floorAccess) {
+        this.floorAccess = floorAccess;
     }
 }

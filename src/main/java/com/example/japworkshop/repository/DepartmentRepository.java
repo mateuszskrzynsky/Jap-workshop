@@ -13,5 +13,5 @@ public interface DepartmentRepository extends JpaRepository<Department, Long> {
     List<Department>findAllByAddress_City(String city);
 
 
-    List<Department> findByCity(String city);
+//    List<Department> findByCity(String city);
 }

@@ -25,7 +25,7 @@ public class DepartmentService {
     }
 
     public List<Department> findDepartmentsByCity(String city){
-        List<Department> departments = departmentRepository.findByCity(city);
+        List<Department> departments = departmentRepository.findAllByAddress_City(city);
         if (departments.isEmpty()){
             throw new ObjectNotFoundException(HttpStatus.NOT_FOUND);
         }
