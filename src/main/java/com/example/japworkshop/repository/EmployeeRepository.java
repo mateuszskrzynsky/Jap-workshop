@@ -19,4 +19,7 @@ public interface EmployeeRepository extends JpaRepository<Employee,Long> {
     @Transactional
     @Query("UPDATE Employee e SET e.salary = :upSalary WHERE e.lastName = :lastName")
     int updateSalary(@Param("lastName") String lastName, @Param("upSalary") BigDecimal upSalary);
+
+    @Query("SELECT e FROM Employee e WHERE e.salary BETWEEN :minSalary AND :maxSalary")
+    List<Employee> findBySalaryRange(@Param("minSalary") BigDecimal minSalary, @Param("maxSalary") BigDecimal maxSalary);
 }

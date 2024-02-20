@@ -33,4 +33,11 @@ public class EmployeeService {
                 .collect(Collectors.toList());
     }
 
+    public List<EmployeeDto> findBySalaryRange(BigDecimal minSalary, BigDecimal maxSalary) {
+        List<Employee> employees = employeeRepository.findBySalaryRange(minSalary, maxSalary);
+        return employees.stream()
+                .map(employeeMapper::toDto)
+                .collect(Collectors.toList());
+    }
+
 }

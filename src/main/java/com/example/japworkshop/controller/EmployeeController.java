@@ -38,4 +38,10 @@ public class EmployeeController {
         employeeRepository.updateSalary(lastName, newSalary);
         return ResponseEntity.ok().build();
     }
+
+    @GetMapping("/findBySalaryRange")
+    public ResponseEntity<List<EmployeeDto>> findEmployeesBySalaryRange(@RequestParam BigDecimal minSalary, @RequestParam BigDecimal maxSalary) {
+        List<EmployeeDto> employeeDto = employeeService.findBySalaryRange(minSalary, maxSalary);
+        return ResponseEntity.ok(employeeDto);
+    }
 }
