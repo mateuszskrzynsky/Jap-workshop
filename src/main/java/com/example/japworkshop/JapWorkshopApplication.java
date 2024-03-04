@@ -10,7 +10,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @RequiredArgsConstructor
 public class JapWorkshopApplication implements CommandLineRunner {
 
-    private final InitService initService;
+//    private final InitService initService;
 
     public static void main(String[] args) {
 
@@ -19,6 +19,6 @@ public class JapWorkshopApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        initService.createSimpleData();
+//        initService.createSimpleData();
     }
 }

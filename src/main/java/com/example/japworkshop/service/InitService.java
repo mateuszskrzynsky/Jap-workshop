@@ -4,14 +4,18 @@ import com.example.japworkshop.model.Address;
 import com.example.japworkshop.model.EmployeeType;
 import com.example.japworkshop.model.entity.*;
 import com.example.japworkshop.repository.*;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.Month;
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
+
+
 
 @Service
 @RequiredArgsConstructor
@@ -25,7 +29,9 @@ public class InitService {
 
     private final FloorRepository floorRepository;
     private final SupervisorRepository supervisorRepository;
+    private final AuthorRepository authorRepository;
 
+    @Transactional
     public void createSimpleData(){
 
         Department department1 = new Department();
@@ -220,6 +226,40 @@ public class InitService {
         employee8.setEntryCard(entryCard8);
         employeeRepository.save(employee8);
 
+        Author author1 = new Author();
+        author1.setName("Mickiewicz");
+
+        Book book1 = new Book();
+        book1.setTitle("Pan Taduesz");
+
+        Book book2 = new Book();
+        book2.setTitle("Dziady");
+
+        author1.setBooks(java.util.List.of(book1, book2));
+        authorRepository.save(author1);
+
+        Author author2 = new Author();
+        author2.setName("Sienkiewicz");
+
+        Book book3 = new Book();
+        book3.setTitle("Potop");
+
+        Book book4 = new Book();
+        book4.setTitle("Ogniem i mieczem");
+        author2.setBooks(java.util.List.of(book3, book4));
+        authorRepository.save(author2);
+
+        Author author3= new Author();
+        author3.setName("J.K. Rowling");
+
+        Book book5=new Book();
+        book5.setTitle("Harry Potter i Kamień Filozoficzny");
+
+        Book book6 = new Book();
+        book6.setTitle("Harry Potter i Komnata Tajemnic");
+
+        author3.setBooks(List.of(book5, book6));
+        authorRepository.save(author3);
 
 
     }
